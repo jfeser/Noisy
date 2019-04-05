@@ -129,7 +129,7 @@ static NSString *sNoiseVolumeKeyPath = @"NoiseVolume";
 // Intercept events that correspond to keyboard commands
 - (void)sendEvent:(NSEvent *)anEvent 
 {
-    if ([anEvent type] == NSKeyDown) {
+    if ([anEvent type] == NSEventTypeKeyDown) {
         NSString *theKeys = [anEvent charactersIgnoringModifiers];
         unichar keyChar = 0;        
         if ([theKeys length] == 0) {
@@ -140,7 +140,7 @@ static NSString *sNoiseVolumeKeyPath = @"NoiseVolume";
             keyChar = [theKeys characterAtIndex:0];
             
             // CommandanEventshift arrow will set the volume to max or min
-            if ([anEvent modifierFlags] & NSCommandKeyMask && [anEvent modifierFlags] & NSShiftKeyMask) {
+            if ([anEvent modifierFlags] & NSEventModifierFlagCommand && [anEvent modifierFlags] & NSEventModifierFlagShift) {
                 if (keyChar == NSLeftArrowFunctionKey || keyChar == NSDownArrowFunctionKey) {
                     [self setVolume:sNoiseMinVolume];
                     return;
